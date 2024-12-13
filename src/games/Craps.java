@@ -81,6 +81,7 @@ public class Craps {
                 System.out.println("Souhaitez-vous continuer ? (o/n)");
 
                 if (Lire.c() == 'n') {
+                    score = -1;
                     gameOver = true;
                 }
             }

@@ -1,5 +1,7 @@
 package games;
 
+import java.util.ArrayList;
+
 public class Game421 {
     // Constantes de la classe
     private static final int NB_DES = 3;
@@ -11,6 +13,7 @@ public class Game421 {
 
     /**
      * Constructeur de la classe
+     *
      * @param faces : nombre de faces des dés
      */
     public Game421(int faces) {
@@ -26,6 +29,7 @@ public class Game421 {
 
     /**
      * Méthode pour jouer au jeu 421
+     *
      * @return le score obtenu
      */
     public int play() {
@@ -34,7 +38,7 @@ public class Game421 {
         initialize();
 
         // Variables locales
-        int score = 0;
+        int score = 1;
         int locked_dices = 0;
 
         // Boucle de jeu
@@ -62,8 +66,9 @@ public class Game421 {
             char choice = Lire.c();
 
             // Si l'utilisateur ne veut pas relancer de dés, on sort de la boucle
-            if (choice == 'n') reroll = true;
-            else {
+            if (choice == 'n') {
+                reroll = true;
+            } else {
                 // Sinon, on demande à l'utilisateur quels dés il veut relancer
                 for (int i = 0; i < NB_DES; i++) {
 
@@ -85,11 +90,20 @@ public class Game421 {
             // Si tous les dés sont verrouillés, on sort de la boucle
             if (locked_dices == NB_DES) {
                 System.out.println("Vous avez verrouillé tous les dés, fin de la partie.");
+
                 reroll = true;
             }
 
-            // On incrémente le score
-            score++;
+            if (reroll) {
+                if (verificationWinning()) {
+                    System.out.println("Vous avez gagné en " + score + " coups !");
+                } else {
+                    System.out.println("Vous avez perdu !");
+                    score = -1;
+                }
+            } else {
+                score++;
+            }
         }
 
         // On retourne le score
@@ -104,5 +118,18 @@ public class Game421 {
         for (int i = 0; i < NB_DES; i++) {
             this.des[i] = new Dice(faces);
         }
+    }
+
+    /**
+     * Méthode pour vérifier si le joueur a gagné
+     * @return true si le joueur a gagné, false sinon
+     */
+    public boolean verificationWinning() {
+        ArrayList<Integer> results = new ArrayList<Integer>();
+        for (int i = 0; i < NB_DES; i++) {
+            results.add(des[i].get_value());
+        }
+
+        return results.contains(4) & results.contains(2) & results.contains(1);
     }
 }

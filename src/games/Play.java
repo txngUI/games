@@ -130,7 +130,7 @@ public class Play {
 
                     try {
                         // Enregistrement du score et consultation des meilleurs scores
-                        game421_level1_sc.add_score(score, player);
+                        if (score != -1) game421_level1_sc.add_score(score, player);
                         consultBestScores(game421_level1_sc, score);
                     } catch (Exception e) {
                         System.out.println("Erreur lors de l'enregistrement du score : " + e.getMessage());
@@ -145,7 +145,7 @@ public class Play {
 
                     try {
                         // Enregistrement du score et consultation des meilleurs scores
-                        game421_level2_sc.add_score(score, player);
+                        if (score != -1) game421_level2_sc.add_score(score, player);
                         consultBestScores(game421_level2_sc, score);
                     } catch (Exception e) {
                         System.out.println("Erreur lors de l'enregistrement du score : " + e.getMessage());
@@ -160,7 +160,7 @@ public class Play {
 
                     try {
                         // Enregistrement du score et consultation des meilleurs scores
-                        game421_level3_sc.add_score(score, player);
+                        if (score != -1) game421_level3_sc.add_score(score, player);
                         consultBestScores(game421_level3_sc, score);
                     } catch (Exception e) {
                         System.out.println("Erreur lors de l'enregistrement du score : " + e.getMessage());
